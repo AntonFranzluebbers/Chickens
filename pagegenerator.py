@@ -9,7 +9,7 @@ class Chicken:
 		self.description = description
 
 
-currentWorkingFile = "2007.html"
+# currentWorkingFile = "2007.html"
 chickens = []
 years = ["all"]
 navButtonHTML = []
@@ -101,7 +101,7 @@ def makeNavButtonHTML(currentYear, indiv = False):
 			navButtonHTML.append("<a href=\"" + upDir + year + ".html\"><li class=\"navbutt " + current + "\">" + year + "</li></a>\n")
 
 #readCSV("db.csv")
-readCSVToObj("db3.tsv")
+readCSVToObj("db.tsv")
 defineYears()
 insertHTML()
 createIndivPages()
