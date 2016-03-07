@@ -58,6 +58,7 @@ def createIndivPages():
 			file.write(line)
 			if line == "<!--INSERT-DESCRIPTION-->\n":
 				file.write("<h1>" + chicken.name + "</h1>\n")
+				file.write("<h3>Breed: " + chicken.breed + "</h3>\n")
 				file.write("<p>" + chicken.description + "</p>\n")
 				for detailImageHTML in makeDetailImageHTML(chicken):
 					file.write(detailImageHTML)
