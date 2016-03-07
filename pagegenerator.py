@@ -74,7 +74,7 @@ def makeDetailImageHTML(chicken):
 	detailImageHTMLArray = []
 	for file in os.listdir("chicken/" + chicken.name.lower()):
 		if file[-4:] == ".jpg":
-			detailImageHTMLArray.append("<img src=\"" + file + "\" class=\"descriptionImage\" />")
+			detailImageHTMLArray.append("<a href=\"" + file + "\"><img src=\"" + file + "\" class=\"descriptionImage\" /></a>")
 	return detailImageHTMLArray
 		
 # reads a tsv file and creates Chicken objects in the array "chickens"	
