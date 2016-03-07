@@ -41,7 +41,9 @@ def insertHTML():
 				for chickenButtonHTML in chickenButtonHTMLToInsert:
 					file.write(chickenButtonHTML)
 		file.close()
-		
+
+# creates a page for each chicken
+# ex. "Gordo.html"		
 def createIndivPages():
 	for chicken in chickens:
 		file = open("indiv/" + chicken.name + ".html", "w")
@@ -50,13 +52,20 @@ def createIndivPages():
 			if line == "<!--INSERT-DESCRIPTION-->\n":
 				file.write("<h1>" + chicken.name + "</h1>\n")
 				file.write("<p>" + chicken.description + "</p>\n")
+				for detailImageHTML in makeDetailImageHTML(chicken):
+					file.write(detailImageHTML)
 			elif line == "<!--INSERT-NAV-BUTTONS-->\n":
 				makeNavButtonHTML(chicken.year, True)
 				for navButton in navButtonHTML:
 					file.write(navButton)
 		file.close()
+
+# generates an array of html for the images to be put in the description of the individual chicken pages
+def makeDetailImageHTML(chicken):
+	detailImageHTMLArray = []
+	return detailImageHTMLArray
 		
-	
+# reads a tsv file and creates Chicken objects in the array "chickens"	
 def readCSVToObj(currentCSV = ""):
 	with open(currentCSV, "r") as csvfile:
 		csvReader = csv.reader(csvfile, delimiter="\t")
