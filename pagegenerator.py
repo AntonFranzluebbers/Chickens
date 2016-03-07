@@ -48,7 +48,7 @@ def insertHTML():
 		file.close()
 
 # creates a page for each chicken
-# ex. "Gordo.html"		
+# ex. "chicken/gordo/index.html"		
 def createIndivPages():
 	for chicken in chickens:
 		if not os.path.exists("chicken/" + chicken.name.lower()):
@@ -93,7 +93,7 @@ def convertObjToHTML(year):
 		if not chicken.alive:
 			aliveText = "d"
 		if chicken.year == year or year == "all":
-			htmlarray.append("<a href=\"chicken/" + chicken.name.lower() + "\"><div class=\"thumb " + aliveText + " \" style=\"opacity:1;\"><h3>" + chicken.name + "</h3><div><img src=\"chicken/" + chicken.name.lower() + "/" + chicken.name + ".jpg\"/></div></div></a>\n")
+			htmlarray.append("<a href=\"chicken/" + chicken.name.lower() + "/" + chicken.name.lower() + ".html\"><div class=\"thumb " + aliveText + " \" style=\"opacity:1;\"><h3>" + chicken.name + "</h3><div><img src=\"chicken/" + chicken.name.lower() + "/" + chicken.name + ".jpg\"/></div></div></a>\n")
 
 	return htmlarray
 			
@@ -104,7 +104,7 @@ def makeNavButtonHTML(currentYear, indiv = False):
 	current = ""
 	upDir = ""
 	if indiv:
-		upDir = "../"
+		upDir = "../../"
 	for year in years:
 		current = ""
 		if year ==  "all":
