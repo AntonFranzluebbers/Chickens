@@ -61,6 +61,7 @@ def createIndivPages():
 				file.write("<p>" + chicken.description + "</p>\n")
 				for detailImageHTML in makeDetailImageHTML(chicken):
 					file.write(detailImageHTML)
+					
 			elif line == "<!--INSERT-NAV-BUTTONS-->\n":
 				makeNavButtonHTML(chicken.year, True)
 				for navButton in navButtonHTML:
@@ -70,6 +71,9 @@ def createIndivPages():
 # generates an array of html for the images to be put in the description of the individual chicken pages
 def makeDetailImageHTML(chicken):
 	detailImageHTMLArray = []
+	for file in os.listdir("chicken/" + chicken.name.lower()):
+		if file[-4:] == ".jpg":
+			detailImageHTMLArray.append("<img src=\"" + file + "\" class=\"descriptionImage\" />")
 	return detailImageHTMLArray
 		
 # reads a tsv file and creates Chicken objects in the array "chickens"	
