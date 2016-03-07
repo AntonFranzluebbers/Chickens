@@ -1,4 +1,5 @@
 import csv
+import os
 
 class Chicken:
 	def __init__(self, name = "", year = 0, alive = True, breed = "", description = ""):
@@ -14,6 +15,8 @@ chickens = []
 years = ["all"]
 navButtonHTML = []
 
+
+# adds the years listed in the chicken objects
 def defineYears():
 	yearlist = []
 	for chicken in chickens:
@@ -21,6 +24,8 @@ def defineYears():
 	for year in range(min(yearlist), max(yearlist)+1):
 		years.append(str(year))
 
+# creates a page for each year and adds the chicken buttons to it
+# ex. "2012.html"
 def insertHTML():
 	for year in years:
 		chickenButtonHTMLToInsert = convertObjToHTML(year)
@@ -46,7 +51,9 @@ def insertHTML():
 # ex. "Gordo.html"		
 def createIndivPages():
 	for chicken in chickens:
-		file = open("indiv/" + chicken.name + ".html", "w")
+		if not os.path.exists("chicken/" + chicken.name.lower()):
+			os.makedirs("chicken/" + chicken.name.lower())
+		file = open("chicken/" + chicken.name.lower() + "/" + chicken.name.lower() + ".html", "w")
 		for line in open("chicken_page_template.html", "r"):
 			file.write(line)
 			if line == "<!--INSERT-DESCRIPTION-->\n":
@@ -86,7 +93,7 @@ def convertObjToHTML(year):
 		if not chicken.alive:
 			aliveText = "d"
 		if chicken.year == year or year == "all":
-			htmlarray.append("<a href=\"indiv/" + chicken.name + ".html\"><div class=\"thumb " + aliveText + " \" style=\"opacity:1;\"><h3>" + chicken.name + "</h3><div><img src=\"images/prof/" + chicken.name + ".jpg\"/></div></div></a>\n\n")
+			htmlarray.append("<a href=\"chicken/" + chicken.name.lower() + "\"><div class=\"thumb " + aliveText + " \" style=\"opacity:1;\"><h3>" + chicken.name + "</h3><div><img src=\"chicken/" + chicken.name.lower() + "/" + chicken.name + ".jpg\"/></div></div></a>\n")
 
 	return htmlarray
 			
