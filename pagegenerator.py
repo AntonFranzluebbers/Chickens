@@ -1,4 +1,5 @@
 import csv
+import os
 
 class Chicken:
 	def __init__(self, name = "", year = 0, alive = True, breed = "", description = ""):
@@ -14,6 +15,8 @@ chickens = []
 years = ["all"]
 navButtonHTML = []
 
+
+# adds the years listed in the chicken objects
 def defineYears():
 	yearlist = []
 	for chicken in chickens:
@@ -21,6 +24,8 @@ def defineYears():
 	for year in range(min(yearlist), max(yearlist)+1):
 		years.append(str(year))
 
+# creates a page for each year and adds the chicken buttons to it
+# ex. "2012.html"
 def insertHTML():
 	for year in years:
 		chickenButtonHTMLToInsert = convertObjToHTML(year)
@@ -43,17 +48,21 @@ def insertHTML():
 		file.close()
 
 # creates a page for each chicken
-# ex. "Gordo.html"		
+# ex. "chicken/gordo/index.html"		
 def createIndivPages():
 	for chicken in chickens:
-		file = open("indiv/" + chicken.name + ".html", "w")
+		if not os.path.exists("chicken/" + chicken.name.lower()):
+			os.makedirs("chicken/" + chicken.name.lower())
+		file = open("chicken/" + chicken.name.lower() + "/" + chicken.name.lower() + ".html", "w")
 		for line in open("chicken_page_template.html", "r"):
 			file.write(line)
 			if line == "<!--INSERT-DESCRIPTION-->\n":
 				file.write("<h1>" + chicken.name + "</h1>\n")
+				file.write("<h3>Breed: " + chicken.breed + "</h3>\n")
 				file.write("<p>" + chicken.description + "</p>\n")
 				for detailImageHTML in makeDetailImageHTML(chicken):
 					file.write(detailImageHTML)
+					
 			elif line == "<!--INSERT-NAV-BUTTONS-->\n":
 				makeNavButtonHTML(chicken.year, True)
 				for navButton in navButtonHTML:
@@ -63,6 +72,9 @@ def createIndivPages():
 # generates an array of html for the images to be put in the description of the individual chicken pages
 def makeDetailImageHTML(chicken):
 	detailImageHTMLArray = []
+	for file in os.listdir("chicken/" + chicken.name.lower()):
+		if file[-4:] == ".jpg" or file[-4:] == ".JPG":
+			detailImageHTMLArray.append("<a href=\"" + file + "\"><img src=\"" + file + "\" class=\"descriptionImage\" /></a>")
 	return detailImageHTMLArray
 		
 # reads a tsv file and creates Chicken objects in the array "chickens"	
@@ -86,7 +98,7 @@ def convertObjToHTML(year):
 		if not chicken.alive:
 			aliveText = "d"
 		if chicken.year == year or year == "all":
-			htmlarray.append("<a href=\"indiv/" + chicken.name + ".html\"><div class=\"thumb " + aliveText + " \" style=\"opacity:1;\"><h3>" + chicken.name + "</h3><div><img src=\"images/prof/" + chicken.name + ".jpg\"/></div></div></a>\n\n")
+			htmlarray.append("<a href=\"chicken/" + chicken.name.lower() + "/" + chicken.name.lower() + ".html\"><div class=\"thumb " + aliveText + " \" style=\"opacity:1;\"><h3>" + chicken.name + "</h3><div><img src=\"chicken/" + chicken.name.lower() + "/" + chicken.name + ".jpg\"/></div></div></a>\n")
 
 	return htmlarray
 			
@@ -97,7 +109,7 @@ def makeNavButtonHTML(currentYear, indiv = False):
 	current = ""
 	upDir = ""
 	if indiv:
-		upDir = "../"
+		upDir = "../../"
 	for year in years:
 		current = ""
 		if year ==  "all":
