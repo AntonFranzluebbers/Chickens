@@ -1,7 +1,7 @@
 body {
     color:rgb(20, 20, 20);
     -webkit-transition:.1s;
-    font-family:Myriad Pro, sans serif;
+    font-family:"Segoe UI", "Myriad Pro", "sans serif";
 }
 body div {
     -webkit-transition:.1s;
