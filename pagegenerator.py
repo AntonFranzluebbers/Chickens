@@ -73,7 +73,7 @@ def createIndivPages():
 def makeDetailImageHTML(chicken):
 	detailImageHTMLArray = []
 	for file in os.listdir("chicken/" + chicken.name.lower()):
-		if file[-4:] == ".jpg":
+		if file[-4:] == ".jpg" or file[-4:] == ".JPG":
 			detailImageHTMLArray.append("<a href=\"" + file + "\"><img src=\"" + file + "\" class=\"descriptionImage\" /></a>")
 	return detailImageHTMLArray
 		
