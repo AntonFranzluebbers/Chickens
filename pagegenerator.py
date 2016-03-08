@@ -97,8 +97,12 @@ def convertObjToHTML(year):
 		aliveText = ""
 		if not chicken.alive:
 			aliveText = "d"
+		thumbImageName = "images/error.png"
+		for file in os.listdir("chicken/" + chicken.name.lower()):
+			if file[-4:] == ".jpg" or file[-4:] == ".JPG":
+				thumbImageName = file
 		if chicken.year == year or year == "all":
-			htmlarray.append("<a href=\"chicken/" + chicken.name.lower() + "/" + chicken.name.lower() + ".html\"><div class=\"thumb " + aliveText + " \" style=\"opacity:1;\"><h3>" + chicken.name + "</h3><div><img src=\"chicken/" + chicken.name.lower() + "/" + chicken.name + ".jpg\"/></div></div></a>\n")
+			htmlarray.append("<a href=\"chicken/" + chicken.name.lower() + "/" + chicken.name.lower() + ".html\"><div class=\"thumb " + aliveText + " \" style=\"opacity:1;\"><h3>" + chicken.name + "</h3><div><img src=\"chicken/" + chicken.name.lower() + "/" + thumbImageName + "\"/></div></div></a>\n")
 
 	return htmlarray
 			
