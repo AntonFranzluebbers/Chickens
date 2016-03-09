@@ -12,7 +12,7 @@ class Chicken:
 
 # currentWorkingFile = "2007.html"
 chickens = []
-years = ["all"]
+years = ["all", "unknown"]
 navButtonHTML = []
 
 
@@ -20,7 +20,8 @@ navButtonHTML = []
 def defineYears():
 	yearlist = []
 	for chicken in chickens:
-		yearlist.append(int(chicken.year))
+		if chicken.year != "unknown":
+			yearlist.append(int(chicken.year))
 	for year in range(min(yearlist), max(yearlist)+1):
 		years.append(str(year))
 
@@ -36,6 +37,9 @@ def insertHTML():
 				if year == "all":
 					file.write("<h1>The chickens hatched in all years</h1>")
 					file.write("<p>In order of year hatched.</p>")
+				elif year == "unknown":
+					file.write("<h1>The chickens with an unknown hatch date.</h1>")
+					file.write("<p>If you know the hatch date of one of these chickens, record your knowledge <a href=\"https://docs.google.com/spreadsheets/d/1ePVBvv94f_LUNXYxrVJlI0ZJmNAwarL00pfcorK66nU/edit#gid=0\" >here.</a></p>")
 				elif year != "index":
 					file.write("<h1>The chickens hatched in " + year + "</h1>")
 			elif line == "<!--INSERT-NAV-BUTTONS-->\n":
@@ -51,8 +55,6 @@ def insertHTML():
 # ex. "chicken/gordo/index.html"		
 def createIndivPages():
 	for chicken in chickens:
-		if not os.path.exists("chicken/" + chicken.name.lower()):
-			os.makedirs("chicken/" + chicken.name.lower())
 		file = open("chicken/" + chicken.name.lower() + "/" + chicken.name.lower() + ".html", "w")
 		for line in open("chicken_page_template.html", "r"):
 			file.write(line)
@@ -78,7 +80,7 @@ def makeDetailImageHTML(chicken):
 	return detailImageHTMLArray
 		
 # reads a tsv file and creates Chicken objects in the array "chickens"	
-def readCSVToObj(currentCSV = ""):
+def convertCSVToObj(currentCSV = ""):
 	with open(currentCSV, "r") as csvfile:
 		csvReader = csv.reader(csvfile, delimiter="\t")
 		currentRow = 0
@@ -89,6 +91,13 @@ def readCSVToObj(currentCSV = ""):
 					alive = False
 				chickens.append(Chicken(row[0], row[1], alive, row[3], row[4]))
 			currentRow += 1
+	makeChickenDirs()
+			
+# makes the directories for the chickens
+def makeChickenDirs():
+	for chicken in chickens:
+		if not os.path.exists("chicken/" + chicken.name.lower()):
+			os.makedirs("chicken/" + chicken.name.lower())
 
 # makes the html for the chicken buttons
 def convertObjToHTML(year):
@@ -97,7 +106,7 @@ def convertObjToHTML(year):
 		aliveText = ""
 		if not chicken.alive:
 			aliveText = "d"
-		thumbImageName = "images/error.png"
+		thumbImageName = "../../images/error.png\" style=\"position:relative; top:-80px;"
 		for file in os.listdir("chicken/" + chicken.name.lower()):
 			if file[-4:] == ".jpg" or file[-4:] == ".JPG":
 				thumbImageName = file
@@ -126,7 +135,8 @@ def makeNavButtonHTML(currentYear, indiv = False):
 			navButtonHTML.append("<a href=\"" + upDir + year + ".html\"><li class=\"navbutt " + current + "\">" + year + "</li></a>\n")
 
 #readCSV("db.csv")
-readCSVToObj("db.tsv")
+convertCSVToObj("db.tsv")
 defineYears()
 insertHTML()
 createIndivPages()
+input("Press Enter to continue...")
