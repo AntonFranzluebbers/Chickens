@@ -1,5 +1,5 @@
 function versionNum() {
-	var ver=1.7;
+	var ver=1.8;
 	var v=document.getElementById("version");
 	v.innerHTML="Version " + ver;
 }
@@ -16,6 +16,6 @@ function current() {
 			d[i].style.opacity = "1";
 		}
 	}
-	
+
 	t.classList.toggle("toggledown");
 }
