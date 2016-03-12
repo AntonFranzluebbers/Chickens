@@ -106,7 +106,7 @@ def convertObjToHTML(year):
 		aliveText = ""
 		if not chicken.alive:
 			aliveText = "d"
-		thumbImageName = "../../images/error.png\" style=\"position:relative; top:-80px;"
+		thumbImageName = "../../images/error.png\" class=\"errorImg\" style=\"width:50px; padding:1em;"
 		for file in os.listdir("chicken/" + chicken.name.lower()):
 			if file[-4:] == ".jpg" or file[-4:] == ".JPG":
 				thumbImageName = file
