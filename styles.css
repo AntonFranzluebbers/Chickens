@@ -4,9 +4,6 @@ body {
 	background-color:#212121;
 	background: radial-gradient(#616161, #212121);
 }
-body div {
-    transition:.1s;
-}
 a {
     text-decoration:none;
     color:#2196F3;
@@ -20,23 +17,19 @@ div a {
 
 #entire {
     max-width:1500px;
-    background-color:black;
+    background-color:#212121;
     margin:auto;
     clear:both;
     box-shadow:5em 5em 15em black;
-    transform:scale(1.00);
-}
-#entire:active {
-    -webkit-transform:scale(1);
 }
 #header {
-    background-color:gray;
-    height:200px;
+    background-color:#757575;
+    height:13em;
     overflow:hidden;
 }
 #headertop {
     background-color:black;
-    height:200px;
+    height:13em;
     overflow:hidden;
 }
 #headertop img {
@@ -55,13 +48,12 @@ div a {
     z-index:10;
     position:relative;
     bottom:120px;
-    transition:.1s;
 }
 
 .viewChickens {
 	background-color:#9E9E9E;
 	padding:1em;
-	transition:transform .1s, background-color .3s, color .3s;
+	transition:transform .1s, background-color .5s, color .3s;
 	list-style-type:none;
 	color:#212121;
 	border-radius:.5em;
@@ -69,38 +61,37 @@ div a {
 
 .viewChickens:hover {
 	background-color:#212121;
-    border-radius:1em;
+  border-radius:1em;
 	transform:scale(2);
-	padding:1em 10em;
-	color:#9E9E9E;
+  padding:1em 10em;
+  color:#9E9E9E;
 }
 
 .navbutt {
-    float:left;
-    background-color:rgba(66, 66, 66, 0.7);
-    padding:10px 30px;
-    margin:10px 10px;
-    transition:.1s;
-    list-style-type:none;
-    border-radius:0px;
-    box-shadow:0px 0px 3px black;
-    color:#bdbdbd;
-
+  float:left;
+  background-color:rgba(66, 66, 66, 0.7);
+  padding:10px 30px;
+  margin:10px 10px;
+  transition:background-color .1s, transform .1s, border-radius .1s;
+  list-style-type:none;
+  border-radius:0px;
+  box-shadow:0px 0px 3px black;
+  color:#bdbdbd;
 }
 .navbutt.current {
     position:relative;
     top:10px;
-	background-color:rgba(97, 97, 97, 0.7);
-	transform:rotateZ(5deg);
+    background-color:rgba(97, 97, 97, 0.7);
+    transform:rotateZ(5deg);
 }
 .navbutt:hover {
     background-color:rgba(33, 33, 33, 1);
     border-radius:1em;
-	transform:rotateZ(-5deg) scale(1.1);
+    transform:rotateZ(-5deg) scale(1.1);
 }
 .navbutt:active {
     transform:rotateX(45deg) rotateZ(5deg);
-	background-color:rgba(70, 70, 70, 0.7);
+    background-color:rgba(70, 70, 70, 0.7);
 }
 
 ul li {
@@ -153,6 +144,7 @@ ul li {
     overflow:hidden;
     top:0;
     z-index:1;
+    transition: transform .5s;
 }
 .thumb h3 {
     padding:0;
@@ -177,10 +169,6 @@ ul li {
 }
 .thumb:hover div {
     transform:scale(1.1);
-}
-
-#sidebar.current {
-	background-color:black !important;
 }
 .d {
     opacity:1;
@@ -217,10 +205,13 @@ ul li {
 
 #footer {
     text-align:right;
-    background-color:#2D2B29;
-    color:#ddd;
+    background-color:#424242;
+    color:#E0E0E0;
 }
 
-@media screen and (min-width: 480px) {
-
+@media screen and (max-width: 1080px) {
+  #years {
+    height: 13em;
+    top: -13em;
+  }
 }
