@@ -23,7 +23,7 @@ div a {
     background-color:black;
     margin:auto;
     clear:both;
-    box-shadow:5px 5px 10px black;
+    box-shadow:5em 5em 15em black;
     transform:scale(1.00);
 }
 #entire:active {
