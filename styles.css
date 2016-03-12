@@ -1,6 +1,6 @@
 body {
     color:rgb(20, 20, 20);
-    font-family:"Segoe UI", "Myriad Pro", "sans-serif";
+    font-family:"Segoe UI", "Myriad Pro", sans-serif;
 	background-color:#212121;
 	background: radial-gradient(#616161, #212121);
 }
@@ -87,7 +87,7 @@ div a {
     border-radius:0px;
     box-shadow:0px 0px 3px black;
     color:#bdbdbd;
-	
+
 }
 .navbutt.current {
     position:relative;
@@ -291,5 +291,5 @@ ul li {
 }
 
 @media screen and (min-width: 480px) {
-    
+
 }
