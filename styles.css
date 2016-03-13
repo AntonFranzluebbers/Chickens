@@ -63,7 +63,7 @@ h1 {
 .viewChickens:hover {
   background-color: #212121;
   border-radius: 1em;
-  transform: scale(2);
+  transform: scale(1.01);
   padding: 1em 10em;
   color: #9E9E9E;
 }
