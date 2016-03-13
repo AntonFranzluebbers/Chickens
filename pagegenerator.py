@@ -52,7 +52,7 @@ def insertHTML():
 		file.close()
 
 # creates a page for each chicken
-# ex. "chicken/gordo/index.html"		
+# ex. "chicken/gordo/index.html"
 def createIndivPages():
 	for chicken in chickens:
 		file = open("chicken/" + chicken.name.lower() + "/" + chicken.name.lower() + ".html", "w")
@@ -64,7 +64,7 @@ def createIndivPages():
 				file.write("<p>" + chicken.description + "</p>\n")
 				for detailImageHTML in makeDetailImageHTML(chicken):
 					file.write(detailImageHTML)
-					
+
 			elif line == "<!--INSERT-NAV-BUTTONS-->\n":
 				makeNavButtonHTML(chicken.year, True)
 				for navButton in navButtonHTML:
@@ -78,8 +78,8 @@ def makeDetailImageHTML(chicken):
 		if file[-4:] == ".jpg" or file[-4:] == ".JPG":
 			detailImageHTMLArray.append("<a href=\"" + file + "\"><img src=\"" + file + "\" class=\"descriptionImage\" /></a>")
 	return detailImageHTMLArray
-		
-# reads a tsv file and creates Chicken objects in the array "chickens"	
+
+# reads a tsv file and creates Chicken objects in the array "chickens"
 def convertCSVToObj(currentCSV = ""):
 	with open(currentCSV, "r") as csvfile:
 		csvReader = csv.reader(csvfile, delimiter="\t")
@@ -92,7 +92,7 @@ def convertCSVToObj(currentCSV = ""):
 				chickens.append(Chicken(row[0], row[1], alive, row[3], row[4]))
 			currentRow += 1
 	makeChickenDirs()
-			
+
 # makes the directories for the chickens
 def makeChickenDirs():
 	for chicken in chickens:
@@ -114,7 +114,7 @@ def convertObjToHTML(year):
 			htmlarray.append("<a href=\"chicken/" + chicken.name.lower() + "/" + chicken.name.lower() + ".html\"><div class=\"thumb " + aliveText + " \" style=\"opacity:1;\"><h3>" + chicken.name + "</h3><div><img src=\"chicken/" + chicken.name.lower() + "/" + thumbImageName + "\"/></div></div></a>\n")
 
 	return htmlarray
-			
+
 # makes navigation bar
 # takes in current year as a number, 0 is all years
 def makeNavButtonHTML(currentYear, indiv = False):
@@ -128,11 +128,11 @@ def makeNavButtonHTML(currentYear, indiv = False):
 		if year ==  "all":
 			if currentYear == "all":
 				current = "current"
-			navButtonHTML.append("<a href=\"" + upDir + "all.html\"><li class=\"navbutt " + current + "\">ALL YEARS</li></a>\n")
+			navButtonHTML.append("<a href=\"" + upDir + "all.html\"><div class=\"navbutt " + current + "\">ALL YEARS</div></a>\n")
 		else:
 			if currentYear == year:
 				current = "current"
-			navButtonHTML.append("<a href=\"" + upDir + year + ".html\"><li class=\"navbutt " + current + "\">" + year + "</li></a>\n")
+			navButtonHTML.append("<a href=\"" + upDir + year + ".html\"><div class=\"navbutt " + current + "\">" + year + "</div></a>\n")
 
 #readCSV("db.csv")
 convertCSVToObj("db.tsv")
