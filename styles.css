@@ -220,3 +220,11 @@ h1 {
     height: 22em;
   }
 }
+@media screen and (max-width: 454px) {
+  #header {
+    height: 31em;
+  }
+  .thumb {
+    width:15em;
+  }
+}
