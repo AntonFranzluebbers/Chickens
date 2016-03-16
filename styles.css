@@ -26,6 +26,9 @@ h1 {
 }
 #headertop {
   background-color: black;
+  background-image: url('images/Group18.jpg');
+  background-size: cover;
+  background-position: center;
   height: 100%;
   overflow: hidden;
 }
@@ -51,21 +54,31 @@ h1 {
   align-items: center;;
   justify-content: flex-start;
 }
-.viewChickens {
-  background-color: #9E9E9E;
+#viewChickens {
+  background-color: #424242;
+  box-shadow: 1px 1px 0px #757575, 2px 2px 0px #757575, 3px 3px 0px #757575, 4px 4px 0px #757575, 5px 5px 0px #757575, 6px 6px 0px #757575;
   padding: 1em;
-  transition: transform .1s, background-color .5s, color .3s;
-  /*list-style-type: none;*/
-  color: #212121;
-  border-radius: .5em;
-  flex: 1 1 auto;
+  transition: transform .2s, background-color .5s, top .2s, left .2s, box-shadow .2s;
+  color: #F5F5F5;
+  float:right;
+  text-align: center;
+  font-size: 1.5em;
+  position: relative;
+  top: 0;
+  left: 0;
 }
-.viewChickens:hover {
+#viewChickens:hover {
   background-color: #212121;
-  border-radius: 1em;
-  transform: scale(1.01);
-  padding: 1em 10em;
-  color: #9E9E9E;
+}
+#viewChickens:active {
+  background-color: #212121;
+  box-shadow: 1px 1px 0px #757575, 2px 2px 0px #757575;
+  left: 4px;
+  top: 4px;
+}
+#viewChickens img {
+  width: 2em;
+  height: 2em;
 }
 .navbutt {
   float: left;
