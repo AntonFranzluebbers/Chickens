@@ -232,6 +232,16 @@ h1 {
   #header {
     height: 22em;
   }
+  #viewChickens {
+    float:none;
+    margin: auto;
+  }
+  #toggles {
+    float:none;
+    position: relative;
+    margin: 1em 2em 2em 2em;
+    text-align: center;
+  }
 }
 @media screen and (max-width: 454px) {
   #header {
@@ -239,5 +249,8 @@ h1 {
   }
   .thumb {
     width:15em;
+  }
+  #toggles {
+    margin: 0 .5em 1.5em .5em;
   }
 }
