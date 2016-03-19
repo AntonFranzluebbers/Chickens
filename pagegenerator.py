@@ -75,7 +75,7 @@ def createIndivPages():
 def makeDetailImageHTML(chicken):
 	detailImageHTMLArray = []
 	for file in os.listdir("chicken/" + chicken.name.lower()):
-		if file[-4:] == ".jpg" or file[-4:] == ".JPG":
+		if (file[-4:] == ".jpg" or file[-4:] == ".JPG") and file[:6] != "small_":
 			detailImageHTMLArray.append("<a href=\"" + file + "\"><img src=\"" + file + "\" class=\"descriptionImage\" /></a>")
 	return detailImageHTMLArray
 
@@ -110,7 +110,7 @@ def convertObjToHTML(year):
 		for file in os.listdir("chicken/" + chicken.name.lower()):
 			if file[-4:] == ".jpg" or file[-4:] == ".JPG":
 				thumbImageName = file
-				if file[:5] == "small_":
+				if file[:6] == "small_":
 					thumbImageName = file;
 		if chicken.year == year or year == "all":
 			htmlarray.append("<a href=\"chicken/" + chicken.name.lower() + "/" + chicken.name.lower() + ".html\"><div class=\"thumb " + aliveText + " \" style=\"opacity:1;\"><h3>" + chicken.name + "</h3><div><img src=\"chicken/" + chicken.name.lower() + "/" + thumbImageName + "\"/></div></div></a>\n")
