@@ -253,4 +253,8 @@ h1 {
   #toggles {
     margin: 0 .5em 1.5em .5em;
   }
+  .descriptionImage {
+    margin: .5em 0;
+    width:100%;
+  }
 }
