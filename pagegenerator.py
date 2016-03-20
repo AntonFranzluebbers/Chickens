@@ -76,7 +76,7 @@ def makeDetailImageHTML(chicken):
 	detailImageHTMLArray = []
 	for file in os.listdir("chicken/" + chicken.name.lower()):
 		if (file[-4:] == ".jpg" or file[-4:] == ".JPG") and file[:6] != "small_" and file[:4] != "med_":
-			detailImageHTMLArray.append("<a href=\"" + file + "\"><img src=\"small_" + file + "\" srcset=\"small_" + file + " 320w, med_" + file + " 640w, " + file + " 2048w\" alt=\"" + file + "\"class=\"descriptionImage\" /></a>\n")
+			detailImageHTMLArray.append("<a href=\"" + file + "\"><img src=\"small_" + file + "\" srcset=\"small_" + file + " 1x, med_" + file + " 2x, " + file + " 4x\" alt=\"" + file + "\"class=\"descriptionImage\" /></a>\n")
 			# detailImageHTMLArray.append("<a href=\"" + file + "\"><img src=\"small_" + file + "\" srcset=\"small_" + file + " 320w, ../../images/error.png 640w, " + file + " 2048w\" alt=\"" + file + "\" class=\"descriptionImage\" /></a>\n")
 	return detailImageHTMLArray
 
@@ -108,13 +108,16 @@ def convertObjToHTML(year):
 		if not chicken.alive:
 			aliveText = "d"
 		thumbImageName = "../../images/error.png\" class=\"errorImg\" style=\"width:50px; padding:1em;"
+		imageExists = False;
 		for file in os.listdir("chicken/" + chicken.name.lower()):
-			if file[-4:] == ".jpg" or file[-4:] == ".JPG":
+			if (file[-4:] == ".jpg" or file[-4:] == ".JPG") and file[:6] != "small_" and file[:4] != "med_":
 				thumbImageName = file
-				if file[:6] == "small_":
-					thumbImageName = file;
+				imageExists = True;
 		if chicken.year == year or year == "all":
-			htmlarray.append("<a href=\"chicken/" + chicken.name.lower() + "/" + chicken.name.lower() + ".html\"><div class=\"thumb " + aliveText + " \" style=\"opacity:1;\"><h3>" + chicken.name + "</h3><div><img src=\"chicken/" + chicken.name.lower() + "/" + thumbImageName + "\"/></div></div></a>\n")
+			if imageExists:
+				htmlarray.append("<a href=\"chicken/" + chicken.name.lower() + "/" + chicken.name.lower() + ".html\"><div class=\"thumb " + aliveText + " \" style=\"opacity:1;\"><h3>" + chicken.name + "</h3><div><img src=\"chicken/" + chicken.name.lower() + "/small_" + thumbImageName + "\" srcset=\"chicken/" + chicken.name.lower() + "/med_" + thumbImageName + " 2x, chicken/" + chicken.name.lower() + "/" + thumbImageName + " 4x\" /></div></div></a>\n")
+			else:
+				htmlarray.append("<a href=\"chicken/" + chicken.name.lower() + "/" + chicken.name.lower() + ".html\"><div class=\"thumb " + aliveText + " \" style=\"opacity:1;\"><h3>" + chicken.name + "</h3><div><img src=\"chicken/" + chicken.name.lower() + "/" + thumbImageName + "\"/></div></div></a>\n")
 
 	return htmlarray
 
