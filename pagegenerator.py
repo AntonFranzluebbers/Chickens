@@ -76,7 +76,7 @@ def makeDetailImageHTML(chicken):
 	detailImageHTMLArray = []
 	for file in os.listdir("chicken/" + chicken.name.lower()):
 		if (file[-4:] == ".jpg" or file[-4:] == ".JPG") and file[:6] != "small_" and file[:4] != "med_":
-			detailImageHTMLArray.append("<a href=\"" + file + "\"><img src=\"small_" + file + "\" srcset=\"med_" + file + " 640w, " + file + " 2048w\" alt=\"" + file + "\"class=\"descriptionImage\" /></a>\n")
+			detailImageHTMLArray.append("<a href=\"" + file + "\"><img src=\"small_" + file + "\" srcset=\"small_" + file + " 320w, med_" + file + " 640w, " + file + " 2048w\" alt=\"" + file + "\"class=\"descriptionImage\" /></a>\n")
 			# detailImageHTMLArray.append("<a href=\"" + file + "\"><img src=\"small_" + file + "\" srcset=\"small_" + file + " 320w, ../../images/error.png 640w, " + file + " 2048w\" alt=\"" + file + "\" class=\"descriptionImage\" /></a>\n")
 	return detailImageHTMLArray
 
