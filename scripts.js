@@ -1,5 +1,5 @@
 function versionNum() {
-	var ver=2.1;
+	var ver=2.2;
 	var v=document.getElementById("version");
 	v.innerHTML="Version " + ver;
 }
