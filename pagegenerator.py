@@ -1,5 +1,6 @@
 import csv
 import os
+from PIL import Image
 
 class Chicken:
 	def __init__(self, name = "", year = 0, alive = True, breed = "", description = ""):
@@ -109,9 +110,13 @@ def convertObjToHTML(year):
 			aliveText = "d"
 		thumbImageName = "../../images/error.png\" class=\"errorImg\" style=\"width:50px; padding:1em;"
 		imageExists = False;
+		lastImageCreationDate = "";
 		for file in os.listdir("chicken/" + chicken.name.lower()):
 			if (file[-4:] == ".jpg" or file[-4:] == ".JPG") and file[:6] != "small_" and file[:4] != "med_":
-				thumbImageName = file
+				imageCreationDate = Image.open("chicken/" + chicken.name.lower() + "/"+ file)._getexif()[36867]
+				if exifDateIsNewer(imageCreationDate, lastImageCreationDate):
+					thumbImageName = file
+					lastImageCreationDate = imageCreationDate
 				imageExists = True;
 		if chicken.year == year or year == "all":
 			if imageExists:
@@ -120,6 +125,31 @@ def convertObjToHTML(year):
 				htmlarray.append("<a href=\"chicken/" + chicken.name.lower() + "/" + chicken.name.lower() + ".html\"><div class=\"thumb " + aliveText + " \" style=\"opacity:1;\"><h3>" + chicken.name + "</h3><div><img src=\"chicken/" + chicken.name.lower() + "/" + thumbImageName + "\"/></div></div></a>\n")
 
 	return htmlarray
+
+# returns the difference in the dates of two EXIF dates
+def exifDateIsNewer(date1, date2):
+	if (date1 == "" or date2 == ""):
+		return True
+	else:
+		if int(date1[:4]) > int(date2[:4]):
+			return True
+		else:
+			if int(date1[:4]) == int(date2[:4]) and int(date1[5:7]) > int(date2[5:7]):
+					return True
+			else:
+				if int(date1[5:7]) == int(date2[5:7]) and int(date1[8:10]) > int(date2[8:10]):
+					return True
+				else:
+					if int(date1[8:10]) == int(date2[8:10]) and int(date1[11:13]) > int(date2[11:13]):
+						return True
+					else:
+						if int(date1[11:13]) == int(date2[11:13]) and int(date1[14:16]) > int(date2[14:16]):
+							return True
+						else:
+							if int(date1[14:16]) == int(date2[14:16]) and int(date1[17:19]) > int(date2[17:19]):
+								return True
+		return False
+
 
 # makes navigation bar
 # takes in current year as a number, 0 is all years
